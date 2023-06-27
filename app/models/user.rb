@@ -6,4 +6,6 @@ class User < ApplicationRecord
   has_many :surveys #as HR
   has_many :surveys_as_receiver, through: :receivers, source: :surveys
   has_many :receivers
+  validates :type_of_departure, inclusion: { in: ["resignation", "retirement", "termination", "layoff", "end of contract", "redundancy"] }
+
 end

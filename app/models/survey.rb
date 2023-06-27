@@ -5,4 +5,6 @@ class Survey < ApplicationRecord
   has_many :questions, through: :survey_questions
   has_many :answers
   has_many :receivers
+  validates :status, inclusion: { in: ["draft", "active", "completed", "archived"] }
+
 end
