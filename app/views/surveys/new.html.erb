@@ -7,11 +7,6 @@
         <%= simple_form_for @survey do |f| %>
           <%= f.input :name, label: "Name of Your Survey" %>
           <%= f.input :description, label: "Describe your survey" %>
-          <div class="d-flex w-100 justify-content-between" >
-            <%= f.input :anonymous, as: :select, collection: [['Yes',true], ['No',false]], required: true %>
-            <%= f.input :template_id, collection: ::Template.all, label: "Which template are you choosing ?" %>
-            <%= f.input :status, label: "Status ?", collection: Survey::STATUS%>
-          </div>
           <%= f.submit "Submit", class: 'custom-button' %>
         <% end %>
       </div>

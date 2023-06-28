@@ -12,8 +12,7 @@ class SurveysController < ApplicationController
     @survey = Survey.new(survey_params)
     @survey.user = current_user
     @survey.save!
-    redirect_to root_path
-    #redirect_to survey_path(@survey)
+    redirect_to survey_templates_path(@survey)
   end
 
   def update

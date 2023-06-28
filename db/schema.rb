@@ -56,9 +56,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_26_150528) do
     t.string "name"
     t.string "description"
     t.boolean "anonymous"
+    t.string "status", default: "draft", null: false
     t.bigint "user_id", null: false
-    t.bigint "template_id", null: false
-    t.string "status"
+    t.bigint "template_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["template_id"], name: "index_surveys_on_template_id"
