@@ -4,10 +4,9 @@ class CreateSurveys < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :description
       t.boolean :anonymous
+      t.string :status, default: "draft", null: false
       t.references :user, null: false, foreign_key: true
-      t.references :template, null: false, foreign_key: true
-      t.string :status
-
+      t.references :template, null: true, foreign_key: true
       t.timestamps
     end
   end

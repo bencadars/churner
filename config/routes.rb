@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   resources :surveys, only: [:show, :new, :create, :update, :edit] do
     resources :users, only: [:index]
+    resources :templates, only: [:index]
   end
 end
