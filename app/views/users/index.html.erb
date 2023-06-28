@@ -1,0 +1,36 @@
+<div class="container-fluid">
+
+<h1>coucou</h1>
+<div class="container-table">
+
+
+<table class="table table-hover" data-controller="check-all-boxes">
+  <thead>
+    <tr>
+      <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: {action:"change->check-all-boxes#checkAll"} %></th>
+      <th scope="col" class="table-col">First Name</th>
+      <th scope="col" class="table-col">Last Name</th>
+      <th scope="col" class="table-col">Email</th>
+      <th scope="col" class="table-col">Type of Departure</th>
+      <th scope="col" class="table-col">Date of Entry</th>
+      <th scope="col" class="table-col">Date of Departure</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+
+      <th scope="row"><%= check_box_tag "selected_user_ids[]", user.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.type_of_departure %></td>
+      <td><%= user.date_of_integration.strftime("%b %e%t, %Y") %></td>
+      <td><%= user.date_of_departure.strftime("%b %e%t, %Y") %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  </div>
+</div>
