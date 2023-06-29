@@ -19,4 +19,6 @@ class User < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+
+    
 end

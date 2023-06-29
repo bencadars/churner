@@ -6,5 +6,6 @@ class Survey < ApplicationRecord
   has_many :questions, through: :survey_questions
   has_many :answers
   has_many :receivers
+  has_many :users, through: :receivers
   validates :status, inclusion: { in: STATUS }
 end

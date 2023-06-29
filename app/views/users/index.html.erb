@@ -4,7 +4,7 @@
     </div>
     <div class="item-buttons">
       <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
-      <%= link_to "Next", root_path, class: "btn btn-primary" %>
+      <%= button_to "Next", root_path , method: :get, disabled: @survey.receivers.count == 0, class: "btn btn-primary" %>
     </div>
   </div>
   <div class="container-search">
@@ -27,10 +27,15 @@
         <div class="button-search">
           <%= submit_tag "Search", class: "btn btn-primary" %>
         </div>
+        <div class="receiver_count">
+          <p><i><%= @survey.receivers.count %> employee(s) added to your survey</i></p>
+        </div>
       </div>
     <% end %>
   </div>
   <div class="container-table">
+    <%= form_with url: add_receivers_survey_path(@survey), method: :post do |form| %>
+
     <table class="table table-hover" data-controller="check-all-boxes">
       <thead>
         <tr>
@@ -47,7 +52,7 @@
       <tbody>
         <% @users.each do |user| %>
         <tr>
-          <th scope="row"><%= check_box_tag "selected_user_ids[]", user.id, false, data: { check_all_boxes_target: "checkbox" } %></th>
+          <th scope="row"><%= check_box_tag "selected_user_ids[]", user.id, @survey_users.include?(user), data: { check_all_boxes_target: "checkbox" } %></th>
           <td><%= user.first_name %></td>
           <td><%= user.last_name %></td>
           <td><%= user.email %></td>
@@ -59,5 +64,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= submit_tag "Add to Survey", class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
