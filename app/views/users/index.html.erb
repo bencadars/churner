@@ -3,36 +3,32 @@
     <div class="item-breadcrumb">
     </div>
     <div class="item-buttons">
-      <div class="item-btn-save">
-      </div>
-      <div class="item-btn-next">
-      </div>
+      <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
+      <%= link_to "Next", root_path, class: "btn btn-primary" %>
     </div>
   </div>
   <div class="container-search">
-    <div class="item-search-input">
-      <div class="input-search">
-        <%= form_with url: survey_users_path, method: :get do |form| %>
+    <%= form_with url: survey_users_path, method: :get do |form| %>
+      <div class="item-search-input">
+        <div class="input-search">
           <%= text_field_tag :query,
             params[:query],
             class: "form-control",
             placeholder: "Search former employees" %>
-        <% end %>
+        </div>
+        <div class="item-filter">
+          <%= select_tag "filter[type_of_departure]", raw("
+            <option value='resignation' #{'selected' if params[:filter]&.[](:type_of_departure) == 'resignation'}>resignation</option>
+            <option value='retirement' #{'selected' if params[:filter]&.[](:type_of_departure) == 'retirement'}>retirement</option>
+            <option value='termination' #{'selected' if params[:filter]&.[](:type_of_departure) == 'termination'}>termination</option>
+            <option value='layoff' #{'selected' if params[:filter]&.[](:type_of_departure) == 'layoff'}>layoff</option>"),
+          prompt: "Filter by type of departure", class: "form-select" %>
+        </div>
+        <div class="button-search">
+          <%= submit_tag "Search", class: "btn btn-primary" %>
+        </div>
       </div>
-      <div class="button-search">
-        <%= submit_tag "Search", class: "btn btn-primary" %>
-      </div>
-    </div>
-    <div class="item-filter">
-      <%= select_tag "filter[type_of_departure]", raw("
-        <option value='1' #{'selected' if params[:filter]&.[](:type_of_departure) == 'resignation'}>resignation</option>
-        <option value='2' #{'selected' if params[:filter]&.[](:type_of_departure) == 'retirement'}>retirement</option>
-        <option value='3' #{'selected' if params[:filter]&.[](:type_of_departure) == 'termination'}>termination</option>
-        <option value='5' #{'selected' if params[:filter]&.[](:type_of_departure) == 'layoff'}>layoff</option>"),
-      prompt: "Filter by type of departure", class: "form-control select required" %>
-
-      <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
-    </div>
+    <% end %>
   </div>
   <div class="container-table">
     <table class="table table-hover" data-controller="check-all-boxes">
