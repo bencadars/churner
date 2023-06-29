@@ -1,0 +1,18 @@
+.two-button-container {
+  text-align: right;
+}
+
+.round-button {
+  border-radius: 25px;
+  background-color: #332c54;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin-left: 10px; //pour espace entre boutons
+  float: right; //aligner boutons à droite
+}
+
+.round-button:hover {
+  background-color: #dddddd;
+  color: black;
+}

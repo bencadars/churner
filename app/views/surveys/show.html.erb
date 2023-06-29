@@ -1,0 +1,23 @@
+<h1>Coucou 🚀</h1>
+
+<h1><strong>You're almost done, just a quick recap before sending!</strong></h1>
+
+<!-- Nombre d'employés sélectionnés -->
+<p>
+  <i class="icon"></i>
+  <%= @survey.receivers.count %> employees selected
+  <span class="details-toggle">see details <i class="arrow-down"></i></span>
+</p>
+
+<!-- Template sélectionné -->
+<p>
+  <i class="icon"></i>
+  <%= @survey.template_selected.name %> selected for the template
+  <span class="details-toggle">see details <i class="arrow-down"></i></span>
+</p>
+
+<!-- Boutons Save as Draft et Send -->
+<div>
+  <%= button_to "Save as Draft", "#"%>
+  <%= button_to "Send", "#"%>
+</div>

@@ -1,38 +1,38 @@
 <ul class="steps">
-  <li class="futur">
+
+  <li class="message-row d-flex <%= controller == 'surveys' && action == 'new' ? 'present' : 'futur' %>">
     <span>
-      <strong>Step 1</strong>
-      Title & Description
+      <strong>1. Title & Description</strong>
     </span><i></i>
   </li>
-  <li class="futur">
+
+  <li class="message-row d-flex <%= controller == 'templates' && action == 'index' && params[:survey_id] ? 'present' : 'futur' %>">
     <span>
-      <strong>Step 2</strong>
-      Template & Questions
+      <strong>2. Template & Questions</strong>
     </span><i></i>
   </li>
+
   <li class="message-row d-flex <%= controller == 'users' && action == 'index' && params[:survey_id] ? 'present' : 'futur' %>">
     <span>
-      <strong>Step 3</strong>
-      Choose employees
+      <strong>3. Choose employees</strong>
     </span><i></i>
   </li>
-  <li class="futur">
+
+  <li class="message-row d-flex <%= controller == 'surveys' && action == 'edit' && params[:survey_id] ? 'present' : 'futur' %>">
     <span>
-      <strong>Step 4</strong>
-      Options
+      <strong>4. Options</strong>
     </span><i></i>
   </li>
-  <li class="futur">
+
+  <li class="message-row d-flex <%= controller == 'surveys' && action == 'show' && params[:survey_id] ? 'present' : 'futur' %>"">
     <span>
-      <strong>Step 5</strong>
-      Summary and Send
+      <strong>5. Summary and Send</strong>
     </span><i></i>
   </li>
+
   <li class="futur">
     <span>
-      <strong>Step 6</strong>
-      View of Survey Result
+      <strong>6. View of Survey Result</strong>
     </span><i></i>
   </li>
 </ul>
