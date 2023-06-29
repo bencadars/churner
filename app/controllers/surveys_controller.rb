@@ -11,7 +11,7 @@ class SurveysController < ApplicationController
   def create
     @survey = Survey.new(survey_params)
     @survey.user = current_user
-    @survey.save!
+    @survey.save
     redirect_to survey_templates_path(@survey)
   end
 
