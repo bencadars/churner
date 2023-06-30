@@ -32,40 +32,43 @@
     </div>
   </div>
   <div class="container-table">
-    <table class="table table-hover" data-controller="check-all-boxes">
-      <thead>
-        <tr>
-          <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: {action:"change->check-all-boxes#checkAll"} %></th>
-          <th scope="col" class="table-col">Name</th>
-          <th scope="col" class="table-col">Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @templates.each do |template| %>
+    <%= form_with url: survey_path(@survey), method: :patch do |form| %>
+      <table class="table table-hover" data-controller="check-all-boxes">
+        <thead>
           <tr>
-            <th scope="row"><%= radio_button_tag "selected_template_ids[]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
-            <td><%= template.name %></td>
-            <td><%= template.description %>
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
-                    Questions
-                    </button>
-                  </h2>
-                  <div id="Acordeon-<%= template.id%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <% template.questions.each do |question| %>
-                        <p><%= question.text %></p>
-                      <% end %>
+            <th scope="col" class="table-col"></th>
+            <th scope="col" class="table-col">Name</th>
+            <th scope="col" class="table-col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @templates.each do |template| %>
+            <tr>
+              <th scope="row"><%= radio_button_tag "survey[template_id]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
+              <td><%= template.name %></td>
+              <td><%= template.description %>
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
+                      Questions
+                      </button>
+                    </h2>
+                    <div id="Acordeon-<%= template.id%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <% template.questions.each do |question| %>
+                          <p><%= question.text %></p>
+                        <% end %>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%= submit_tag "Select Template", class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
