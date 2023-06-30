@@ -8,14 +8,14 @@
 require "faker"
 
 puts "cleaning the database (except users)..."
+puts "Cleaning Surveys..."
+Survey.destroy_all
 puts "Cleaning Template_questions..."
 TemplateQuestion.destroy_all
 puts "cleaning templates..."
 Template.destroy_all
 puts "cleaning questions..."
 Question.destroy_all
-puts "Cleaning Surveys..."
-Survey.destroy_all
 
 puts "Creating 6 templates..."
 
