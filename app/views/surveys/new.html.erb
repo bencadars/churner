@@ -1,16 +1,42 @@
-<div class="container-small">
-  <div class="row">
-    <div class="col-12">
-      <div class="bg-white rounded p-3 shadow">
-        <%= render "shared/breadcrumb"%>
-        <h5><strong>Add your survey !</strong></h5>
-        <br>
-        <%= simple_form_for @survey do |f| %>
-          <%= f.input :name, label: "Name of Your Survey" %>
-          <%= f.input :description, label: "Describe your survey" %>
-          <%= f.submit "Submit", class: 'custom-button' %>
-        <% end %>
+<div class="container-fluid">
+  <div class="container-breadcrumb-buttons">
+    <div class="item-breadcrumb">
+      <div class="multi-step">
+        <ul class="multi-step-list">
+          <li class="multi-step-item current">
+            <div class="item-wrap">
+              <p class="item-title">Title & Description</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Template & Questions</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Choose employees</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Summary and Send</p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
+    <div class="item-buttons">
+      <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
+      <%= button_to "Next", root_path , class: "btn btn-primary" %>
+    </div>
   </div>
+    <div class="container-survey-form">
+      <h5><strong>Add your survey !</strong></h5>
+      <%= simple_form_for @survey do |f| %>
+        <%= f.input :name, label: "Name:" %>
+        <%= f.input :description, as: :text, label: "Description:" %>
+        <%= f.submit "Submit", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
 </div>
