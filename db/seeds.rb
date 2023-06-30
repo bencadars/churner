@@ -39,15 +39,15 @@ template_layoff = Template.create(
   description: "This survey aims to collect feedback from employees who were laid off, addressing their initial reaction, provided assistance, job search plans, and potential interest in future opportunities with the company."
 )
 
-template_end_contract = Template.create(
-  name: "End of Contract",
-  description: "This survey is designed to gather feedback from employees whose contract has ended, including their overall experience, feedback on the work environment, training programs, and suggestions for improvement."
-)
+#template_end_contract = Template.create(
+ # name: "End of Contract",
+  #description: "This survey is designed to gather feedback from employees whose contract has ended, including their overall experience, feedback on the work environment, training programs, and suggestions for improvement."
+#)
 
-template_redundancy = Template.create(
-  name: "Redundancy",
-  description: "This survey focuses on gathering feedback from employees affected by redundancy, addressing their experience during the process, support received, future career plans, and suggestions for the company."
-)
+#template_redundancy = Template.create(
+  #name: "Redundancy",
+  #description: "This survey focuses on gathering feedback from employees affected by redundancy, addressing their experience during the process, support received, future career plans, and suggestions for the company."
+#)
 
 puts "Creating 20 questions..."
 # Resignation questions

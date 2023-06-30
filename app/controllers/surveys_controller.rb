@@ -14,6 +14,7 @@ class SurveysController < ApplicationController
     @survey.user = current_user
     @survey.save
     redirect_to survey_templates_path(@survey)
+    flash[:notice] = "#{@survey.name} created"
   end
 
   def update
