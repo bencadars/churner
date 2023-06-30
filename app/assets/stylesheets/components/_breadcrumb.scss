@@ -1,81 +1,143 @@
-.steps {
-  padding-left: 0;
+.breadcrumb-arrow {
+  min-height: 36px;
+  /*     padding: 0; */
+  line-height: 36px;
   list-style: none;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 12px;
-  line-height: 1;
-  margin: 30px auto;
-  border-radius: 3px;
+  overflow: auto;
+  /*    background-color: #e6e9ed*/
+  /*background: linear-gradient(to right, #eaeaea 0%,#ffffff 100%);*/
 }
 
-.steps strong {
-  font-size: 14px;
-  display: block;
-  line-height: 1.4;
+.breadcrumb-arrow li:first-child a {
+  border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
 }
 
-.steps>li {
+.breadcrumb-arrow li,
+.breadcrumb-arrow li a,
+.breadcrumb-arrow li span {
+  display: inline-block;
+  /*vertical-align: top;*/
+}
+
+.breadcrumb-arrow li:not(:first-child) {
+  margin-left: -5px;
+}
+
+.breadcrumb-arrow li+li:before {
+  padding: 0;
+  content: "";
+}
+
+.breadcrumb-arrow li span {
+  padding: 0 10px;
+}
+
+.breadcrumb-arrow li a,
+.breadcrumb-arrow li:not(:first-child) span {
+  height: 36px;
+  padding: 0 10px 0 25px;
+  line-height: 36px;
+}
+
+.breadcrumb-arrow li:first-child a {
+  padding: 0 10px;
+}
+
+.breadcrumb-arrow li a {
   position: relative;
-  display: block;
-  /* border: 1px solid #ddd; */
-  padding: 12px 50px 8px 50px;
-  width: 140px;
-  height: 40px;
+  color: #fff;
+  text-decoration: none;
+  background-color: $primary;
+  border: 1px solid $primary;
 }
 
-@media (min-width: 768px) {
-  .steps>li { float: left; }
-  .steps .past { color: #666; background: #ececec; }
-  .steps .present { color: #000; }
-  .steps .future { color: #777; background: #efefef; }
+.breadcrumb-arrow li:first-child a {
+  padding-left: 10px;
+}
 
-  .steps li > span:after,
-  .steps li > span:before {
-    content: "";
-    display: block;
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: solid transparent;
-    border-left-color: #f0f0f0;
-    border-width: 30px;
-  }
+.breadcrumb-arrow li a:after,
+.breadcrumb-arrow li a:before {
+  position: absolute;
+  top: -1px;
+  width: 0;
+  height: 0;
+  content: '';
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+}
 
-  .steps li > span:after {
-    top: -5px;
-    z-index: 1;
-    border-left-color: white;
-    border-width: 34px;
-  }
+.breadcrumb-arrow li a:before {
+  right: -10px;
+  z-index: 3;
+  border-left-color: $primary;
+  border-left-style: solid;
+  border-left-width: 10px;
+}
 
-  .steps li > span:before { z-index: 2; }
+.breadcrumb-arrow li a:after {
+  right: -11px;
+  z-index: 2;
+  border-left: 11px solid #fff;
+}
 
-  .steps li.past + li > span:before { border-left-color: #ececec; }
-  .steps li.present + li > span:before { border-left-color: #fff; }
-  .steps li.future + li > span:before { border-left-color: #efefef; }
+.breadcrumb-arrow li a:focus,
+.breadcrumb-arrow li a:hover {
+  background-color: $secondary;
+  border: 1px solid $secondary;
+}
 
-  .steps li:first-child > span:after,
-  .steps li:first-child > span:before { display: none; }
+.breadcrumb-arrow li a:focus:before,
+.breadcrumb-arrow li a:hover:before {
+  border-left-color: $primary;
+}
 
-  /* Arrows at start and end */
-  .steps li:first-child i,
-  .steps li:last-child i {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: solid transparent;
-    border-left-color: white;
-    border-width: 30px;
-  }
+.breadcrumb-arrow li a:active {
+  background-color: $secondary;
+  border: 1px solid $secondary;
+}
 
-  .steps li:last-child i {
-    left: auto;
-    right: -30px;
-    border-left-color: transparent;
-    border-top-color: white;
-    border-bottom-color: white;
-  }
+.breadcrumb-arrow li a:active:after,
+.breadcrumb-arrow li a:active:before {
+  border-left-color: $secondary;
+}
+
+/*set for Last child*/
+
+.breadcrumb-arrow li.active span {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  background-color: $secondary;
+  border: 1px solid $secondary
+}
+
+.breadcrumb-arrow li.active:first-child span {
+  padding-left: 10px;
+}
+
+.breadcrumb-arrow li.active span:after,
+.breadcrumb-arrow li.active span:before {
+  position: absolute;
+  top: -1px;
+  width: 0;
+  height: 0;
+  content: '';
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+}
+
+.breadcrumb-arrow li.active span:before {
+  right: -10px;
+  z-index: 3;
+  border-left-color: $secondary;
+  border-left-style: solid;
+  border-left-width: 11px;
+}
+
+.breadcrumb-arrow li.active span:after {
+  right: -11px;
+  z-index: 2;
+  border-left: 10px solid $secondary;
 }
