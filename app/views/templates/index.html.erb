@@ -1,40 +1,71 @@
 <div class="container-fluid">
-  <%= render "shared/breadcrumb"  %>
-<div class="container-table">
-  <table class="table table-hover" data-controller="check-all-boxes">
-    <thead>
-      <tr>
-        <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: {action:"change->check-all-boxes#checkAll"} %></th>
-        <th scope="col" class="table-col">Name</th>
-        <th scope="col" class="table-col">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @templates.each do |template| %>
+   <div class="container-breadcrumb-buttons">
+    <div class="item-breadcrumb">
+      <div class="multi-step">
+        <ul class="multi-step-list">
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Title & Description</p>
+            </div>
+          </li>
+          <li class="multi-step-item current">
+            <div class="item-wrap">
+              <p class="item-title">Template & Questions</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Choose employees</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Summary and Send</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="item-buttons">
+      <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
+      <%= button_to "Next", root_path , class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div class="container-table">
+    <table class="table table-hover" data-controller="check-all-boxes">
+      <thead>
         <tr>
-          <th scope="row"><%= radio_button_tag "selected_template_ids[]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
-          <td><%= template.name %></td>
-          <td><%= template.description %>
-            <div class="accordion" id="accordionExample">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
-                  Questions
-                  </button>
-                </h2>
-                <div id="Acordeon-<%= template.id%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
-                  <div class="accordion-body">
-                    <% template.questions.each do |question| %>
-                      <p><%= question.text %></p>
-                    <% end %>
+          <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: {action:"change->check-all-boxes#checkAll"} %></th>
+          <th scope="col" class="table-col">Name</th>
+          <th scope="col" class="table-col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @templates.each do |template| %>
+          <tr>
+            <th scope="row"><%= radio_button_tag "selected_template_ids[]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
+            <td><%= template.name %></td>
+            <td><%= template.description %>
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
+                    Questions
+                    </button>
+                  </h2>
+                  <div id="Acordeon-<%= template.id%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <% template.questions.each do |question| %>
+                        <p><%= question.text %></p>
+                      <% end %>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
