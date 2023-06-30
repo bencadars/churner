@@ -1,7 +1,34 @@
 <div class="container-fluid">
   <div class="container-breadcrumb-buttons">
     <div class="item-breadcrumb">
-    <%= render "shared/breadcrumb"  %>
+    <div class="row">
+    <div class="col-xs-12">
+      <div class="multi-step">
+        <ul class="multi-step-list">
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Title & Description</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Template & Questions</p>
+            </div>
+          </li>
+          <li class="multi-step-item current">
+            <div class="item-wrap">
+              <p class="item-title">Choose employees</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Summary and Send</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
     </div>
     <div class="item-buttons">
       <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>

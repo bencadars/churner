@@ -1,143 +1,258 @@
-.breadcrumb-arrow {
-  min-height: 36px;
-  /*     padding: 0; */
-  line-height: 36px;
-  list-style: none;
-  overflow: auto;
-  /*    background-color: #e6e9ed*/
-  /*background: linear-gradient(to right, #eaeaea 0%,#ffffff 100%);*/
+// Variables
+$base-margin: 2em;
+$base-padding: 1em;
+$base-border-radius: .2em;
+$screen-xs-max: 786px;
+
+$text-color: #263238;
+$text-color-inverted: #fff;
+$clickable-hover: #d8f1ff;
+
+$brand-primary: #3e5fd6;
+$brand-success: #26a25f;
+$brand-danger: #f82502;
+
+$accent-dark: #253c8e;
+$accent-light: #3855bd;
+$accent-lighter: #ffffff;
+
+$icon-danger: '!';
+$icon-success: '✓';
+
+$animation-time: 0.5s;
+
+html, body {
+  background-color: #efefef;
 }
 
-.breadcrumb-arrow li:first-child a {
-  border-radius: 4px 0 0 4px;
-  -webkit-border-radius: 4px 0 0 4px;
-  -moz-border-radius: 4px 0 0 4px;
+
+// Multi-step code
+
+.multi-step {
+	margin: ($base-margin / 2) 0;
 }
 
-.breadcrumb-arrow li,
-.breadcrumb-arrow li a,
-.breadcrumb-arrow li span {
-  display: inline-block;
-  /*vertical-align: top;*/
+// Setting up flexbox for list
+.multi-step-list {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	list-style-type: none;
+	padding: 0;
+	.multi-step-item:first-child { margin-left: 0; }
+	.multi-step-item:last-child { margin-right: 0; }
 }
 
-.breadcrumb-arrow li:not(:first-child) {
-  margin-left: -5px;
+// Defaults for each 'step'
+.multi-step-item {
+	position: relative;
+	width: 100%;
+	margin: 0 ($base-margin / 6);
+	@media only screen and (max-width: $screen-xs-max) {
+		margin: 0 ($base-margin / 6);
+	}
+	z-index: 2;
+	border-radius: $base-border-radius;
+
+	// Step title and subtitle defaults
+	.item-title,
+	.item-subtitle {
+		position: relative;
+		margin: 0;
+		z-index: 2;
+	}
+	@media only screen and (max-width: $screen-xs-max) {
+		.item-subtitle { display: none; }
+	}
+	.item-title {
+		color: $primary;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	// Different step states [ active, current, completed, error]
+	&.active:hover { cursor: pointer; }
+	&.current .item-title,
+	&.current .item-subtitle {
+		color: $text-color-inverted;
+	}
+	&.active.current:hover .item-title,
+	&.active.current:hover .item-subtitle {
+		color: $primary;
+	}
+	&.error:after {
+		position: absolute;
+		top: 50%;
+		z-index: 2;
+		transform: translateY(-50%);
+		right: .5em;
+
+		content: $icon-danger;
+		color: $brand-danger;
+	}
 }
 
-.breadcrumb-arrow li+li:before {
-  padding: 0;
-  content: "";
+// Creates the 'arrow' effect / background colors
+.item-wrap {
+	padding: $base-padding;
+	position: relative;
+	height: 100%;
+	&:before, &:after {
+		position: absolute;
+		left: 0;
+		content: ' ';
+		width: 100%;
+		height: 50.5%;
+		z-index: 1;
+		background-color: $accent-lighter;
+	}
+
+	// Top of the arrow
+	&:before {
+		top: 0;
+		transform: skew(20deg);
+		border-radius: .2em .2em 0 0;
+	}
+	// Bottom of the arrow
+	&:after {
+		bottom: 0;
+		transform: skew(-20deg);
+		border-radius: 0 0 .2em .2em;
+	}
 }
 
-.breadcrumb-arrow li span {
-  padding: 0 10px;
+// Changing arrow colors based on state
+.current .item-wrap:before,
+.current .item-wrap:after {
+	background-color: $primary;
 }
 
-.breadcrumb-arrow li a,
-.breadcrumb-arrow li:not(:first-child) span {
-  height: 36px;
-  padding: 0 10px 0 25px;
-  line-height: 36px;
+.active:hover .item-wrap:before,
+.active:hover .item-wrap:after {
+	background-color: $clickable-hover;
 }
 
-.breadcrumb-arrow li:first-child a {
-  padding: 0 10px;
+.multi-step-item.error {
+	.item-title,
+	.item-subtitle {
+		padding-right: ($base-padding * 2);
+	}
 }
 
-.breadcrumb-arrow li a {
-  position: relative;
-  color: #fff;
-  text-decoration: none;
-  background-color: $primary;
-  border: 1px solid $primary;
+// Changing step styles based on :first/:last step
+.multi-step-item:first-child .item-wrap,
+.multi-step-item:last-child .item-wrap {
+	width: 100%;
+	border-radius: $base-border-radius;
+	&:before, &:after { width: 50%; }
 }
 
-.breadcrumb-arrow li:first-child a {
-  padding-left: 10px;
+// If first step, only point on the right
+.multi-step-item:first-child .item-wrap {
+	background: linear-gradient(to right, $accent-lighter 95%, transparent 5%);
+	&:before, &:after { left: 50%; }
+}
+.active.multi-step-item:first-child:hover .item-wrap {
+	background: linear-gradient(to right, $clickable-hover 95%, transparent 5%);
+}
+.current.multi-step-item:first-child .item-wrap {
+	background: linear-gradient(to right, $primary 95%, transparent 5%);
 }
 
-.breadcrumb-arrow li a:after,
-.breadcrumb-arrow li a:before {
-  position: absolute;
-  top: -1px;
-  width: 0;
-  height: 0;
-  content: '';
-  border-top: 18px solid transparent;
-  border-bottom: 18px solid transparent;
+// If last step, only indent on the left
+.multi-step-item:last-child .item-wrap {
+	background: linear-gradient(to left, $accent-lighter 95%, transparent 5%);
+	&:before, &:after { right: 50%; }
+}
+.active.multi-step-item:last-child:hover .item-wrap {
+	background: linear-gradient(to left, $clickable-hover 95%, transparent 5%);
+}
+.current.multi-step-item:last-child .item-wrap {
+	background: linear-gradient(to left, $primary 95%, transparent 5%);
 }
 
-.breadcrumb-arrow li a:before {
-  right: -10px;
-  z-index: 3;
-  border-left-color: $primary;
-  border-left-style: solid;
-  border-left-width: 10px;
+// MSI Checked & Complete
+.checked .multi-step-item.completed:after {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+	transform: translateY(-50%);
+	right: .5em;
+	content: $icon-success;
+	color: $brand-success;
 }
 
-.breadcrumb-arrow li a:after {
-  right: -11px;
-  z-index: 2;
-  border-left: 11px solid #fff;
+// MSI Numbered
+.numbered .multi-step-item {
+	counter-increment: step-counter;
+	.item-wrap { padding-left: ($base-padding * 5); }
+
+	// Adds number to step
+	&:before {
+		content: counter(step-counter);
+		position: absolute;
+		top: 50%;
+		left: .75em;
+		transform: translateY(-50%);
+		min-width: 1.65em;
+		padding: ($base-padding / 2) $base-padding;
+		z-index: 2;
+		font-size: .85em;
+		background-color: $accent-light;
+		color: $text-color-inverted;
+		font-weight: 600;
+		text-align: center;
+		border-radius: $base-border-radius;
+	}
 }
 
-.breadcrumb-arrow li a:focus,
-.breadcrumb-arrow li a:hover {
-  background-color: $secondary;
-  border: 1px solid $secondary;
+// MSI w/ badge counts
+.item-wrap .badge {
+	position: absolute;
+	right: .5em;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 3;
+}
+.error .item-wrap .badge {
+	right: 2em;
+	~ .item-title,
+	~ .item-subtitle {
+		padding-right: 3em;
+	}
 }
 
-.breadcrumb-arrow li a:focus:before,
-.breadcrumb-arrow li a:hover:before {
-  border-left-color: $primary;
+// MSI CSS Loader
+.multi-step-loading { opacity: .75; }
+
+.current.multi-step-loading:before {
+	border-color: $text-color-inverted;
+	border-top-color: transparent;
+	opacity: 1;
 }
 
-.breadcrumb-arrow li a:active {
-  background-color: $secondary;
-  border: 1px solid $secondary;
+.busy-css {
+	z-index: 3;
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -.5em;
+	margin-left: -.5em;
+	border-radius: 50%;
+	width: 1em;
+	height: 1em;
+	border: .25em solid $accent-dark;
+	border-top-color: transparent;
+	animation: spin ($animation-time * 2) infinite linear;
 }
 
-.breadcrumb-arrow li a:active:after,
-.breadcrumb-arrow li a:active:before {
-  border-left-color: $secondary;
-}
-
-/*set for Last child*/
-
-.breadcrumb-arrow li.active span {
-  position: relative;
-  color: #fff;
-  text-decoration: none;
-  background-color: $secondary;
-  border: 1px solid $secondary
-}
-
-.breadcrumb-arrow li.active:first-child span {
-  padding-left: 10px;
-}
-
-.breadcrumb-arrow li.active span:after,
-.breadcrumb-arrow li.active span:before {
-  position: absolute;
-  top: -1px;
-  width: 0;
-  height: 0;
-  content: '';
-  border-top: 18px solid transparent;
-  border-bottom: 18px solid transparent;
-}
-
-.breadcrumb-arrow li.active span:before {
-  right: -10px;
-  z-index: 3;
-  border-left-color: $secondary;
-  border-left-style: solid;
-  border-left-width: 11px;
-}
-
-.breadcrumb-arrow li.active span:after {
-  right: -11px;
-  z-index: 2;
-  border-left: 10px solid $secondary;
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
