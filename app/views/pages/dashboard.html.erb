@@ -1,2 +1,13 @@
-<h1>Dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<div class="container-fluid">
+  <div class="card-title">
+    <h1>Dashboard</h1>
+    <div class="btn btn-primary" id="home">New Survey</div>
+  </div>
+  <div class="card-counter">
+      <h5><u>This Month:</u></h5>
+        <ul>
+        <li><%= Survey.count %> Surveys created</li>
+        <li><%= User.count %> employees left</li>
+        </ul>
+    </div>
+</div>

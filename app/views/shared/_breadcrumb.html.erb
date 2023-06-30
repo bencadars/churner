@@ -1,38 +1,30 @@
-<ul class="steps">
-
-  <li class="message-row d-flex <%= controller == 'surveys' && action == 'new' ? 'present' : 'futur' %>">
-    <span>
-      <strong>1. Title & Description</strong>
-    </span><i></i>
-  </li>
-
-  <li class="message-row d-flex <%= controller == 'templates' && action == 'index' && params[:survey_id] ? 'present' : 'futur' %>">
-    <span>
-      <strong>2. Template & Questions</strong>
-    </span><i></i>
-  </li>
-
-  <li class="message-row d-flex <%= controller == 'users' && action == 'index' && params[:survey_id] ? 'present' : 'futur' %>">
-    <span>
-      <strong>3. Choose employees</strong>
-    </span><i></i>
-  </li>
-
-  <li class="message-row d-flex <%= controller == 'surveys' && action == 'edit' && params[:survey_id] ? 'present' : 'futur' %>">
-    <span>
-      <strong>4. Options</strong>
-    </span><i></i>
-  </li>
-
-  <li class="message-row d-flex <%= controller == 'surveys' && action == 'show' && params[:survey_id] ? 'present' : 'futur' %>"">
-    <span>
-      <strong>5. Summary and Send</strong>
-    </span><i></i>
-  </li>
-
-  <li class="futur">
-    <span>
-      <strong>6. View of Survey Result</strong>
-    </span><i></i>
-  </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="multi-step">
+        <ul class="multi-step-list">
+          <li class="multi-step-item current">
+            <div class="item-wrap">
+              <p class="item-title">Title & Description</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Template & Questions</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Choose employees</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Summary and Send</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
