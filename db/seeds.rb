@@ -119,9 +119,9 @@ def valid_dates?(date_of_integration, date_of_departure)
   date_of_integration < date_of_departure && date_of_integration < Date.today && date_of_departure < Date.today
 end
 
-if User.count < 20
+if User.count < 100
 # Création de 10 utilisateurs
-  (20 - User.count).times do
+  (100 - User.count).times do
   first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.unique.email
@@ -130,7 +130,7 @@ if User.count < 20
     next if user_exists?(email)
 
     type_of_departure = departure_types.sample
-    date_of_integration = random_date(Date.new(2000, 1, 1), Date.new(2023, 6, 25))
+    date_of_integration = random_date(Date.new(2017, 1, 1), Date.new(2023, 6, 25))
     date_of_departure = random_date(date_of_integration, Date.new(2023, 6, 25))
 
     # Vérifie si les dates sont valides
