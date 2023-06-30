@@ -1,6 +1,10 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: #332c54;
+}
+
+.nav-link {
+  color: white;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -13,6 +17,10 @@
 
 .centered-nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+}
+
+.nav-item dropdown {
+  margin: auto;
 }
