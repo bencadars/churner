@@ -1,23 +1,74 @@
-<h1>Coucou 🚀</h1>
-
-<h1><strong>You're almost done, just a quick recap before sending!</strong></h1>
-
-<!-- Nombre d'employés sélectionnés -->
-<p>
-  <i class="icon"></i>
-  <%= @survey.receivers.count %> employees selected
-  <span class="details-toggle">see details <i class="arrow-down"></i></span>
-</p>
-
-<!-- Template sélectionné -->
-<p>
-  <i class="icon"></i>
-  <%= @survey.template_selected.name %> selected for the template
-  <span class="details-toggle">see details <i class="arrow-down"></i></span>
-</p>
-
-<!-- Boutons Save as Draft et Send -->
-<div>
-  <%= button_to "Save as Draft", "#"%>
-  <%= button_to "Send", "#"%>
+<div class="container-fluid">
+  <div class="container-breadcrumb-buttons">
+    <div class="item-breadcrumb">
+    </div>
+  </div>
+  <h1>You're almost done, just a quick recap before sending!</h1>
+  <div class="container-accordion">
+    <div class="accordion" id="accordionDetails">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingEmployees">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmployees" aria-expanded="true" aria-controls="collapseEmployees">
+            <i class="bi bi-target"></i> Employees Selected: <%= @survey.receivers.count %>
+          </button>
+        </h2>
+        <div id="collapseEmployees" class="accordion-collapse collapse" aria-labelledby="headingEmployees" data-bs-parent="#accordionDetails">
+          <div class="accordion-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" class="table-col">First Name</th>
+                  <th scope="col" class="table-col">Last Name</th>
+                  <th scope="col" class="table-col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @survey.receivers.each do |receiver| %>
+                  <tr>
+                    <td><%= receiver.user.first_name %></td>
+                    <td><%= receiver.user.last_name %></td>
+                    <td><%= receiver.user.email %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTemplate">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTemplate" aria-expanded="true" aria-controls="collapseTemplate">
+            <i class="bi bi-target"></i> Template Selected: <%= @template.name if @template.present? %>
+          </button>
+        </h2>
+        <div id="collapseTemplate" class="accordion-collapse collapse" aria-labelledby="headingTemplate" data-bs-parent="#accordionDetails">
+          <div class="accordion-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" class="table-col">Questions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @template.questions.each do |question| %>
+                  <tr>
+                    <td><%= question.text %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-buttons">
+    <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
+    <%= link_to "Send", root_path, class: "btn btn-primary" %>
+</div>
+<div class="flash flash-success alert alert-dismissible fade show" role="alert">
+  <span><strong>Yay!</strong> 🎉 you successfully send your survey.</span>
+  <a data-bs-dismiss="alert" aria-label="Close">
+    <i class="fas fa-times"></i>
+  </a>
 </div>

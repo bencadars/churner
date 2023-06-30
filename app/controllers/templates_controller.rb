@@ -1,5 +1,5 @@
 class TemplatesController < ApplicationController
   def index
-    @templates = Template.all
+    @templates = Template.includes(template_questions: :question).all
   end
 end
