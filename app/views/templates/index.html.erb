@@ -1,29 +1,40 @@
 <div class="container-fluid">
   <%= render "shared/breadcrumb"  %>
-
-<h1>Templates List</h1>
 <div class="container-table">
-
-
-<table class="table table-hover" data-controller="check-all-boxes">
-  <thead>
-    <tr>
-      <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: {action:"change->check-all-boxes#checkAll"} %></th>
-      <th scope="col" class="table-col">Name</th>
-      <th scope="col" class="table-col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @templates.each do |template| %>
-    <tr>
-
-      <th scope="row"><%= check_box_tag "selected_template_ids[]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
-      <td><%= template.name %></td>
-      <td><%= template.description %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-
-  </div>
+  <table class="table table-hover" data-controller="check-all-boxes">
+    <thead>
+      <tr>
+        <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: {action:"change->check-all-boxes#checkAll"} %></th>
+        <th scope="col" class="table-col">Name</th>
+        <th scope="col" class="table-col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @templates.each do |template| %>
+        <tr>
+          <th scope="row"><%= radio_button_tag "selected_template_ids[]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
+          <td><%= template.name %></td>
+          <td><%= template.description %>
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
+                  Questions
+                  </button>
+                </h2>
+                <div id="Acordeon-<%= template.id%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <% template.questions.each do |question| %>
+                      <p><%= question.text %></p>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 </div>
