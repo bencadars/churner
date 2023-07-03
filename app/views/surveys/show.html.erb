@@ -1,69 +1,96 @@
 <div class="container-fluid">
   <div class="container-breadcrumb-buttons">
     <div class="item-breadcrumb">
+      <div class="multi-step">
+        <ul class="multi-step-list">
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Title & Description</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Template & Questions</p>
+            </div>
+          </li>
+          <li class="multi-step-item">
+            <div class="item-wrap">
+              <p class="item-title">Choose employees</p>
+            </div>
+          </li>
+          <li class="multi-step-item current">
+            <div class="item-wrap">
+              <p class="item-title">Summary and Send</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="item-buttons">
+      <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
     </div>
   </div>
-  <h1>You're almost done, just a quick recap before sending!</h1>
-  <div class="container-accordion">
-    <div class="accordion" id="accordionDetails">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingEmployees">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmployees" aria-expanded="true" aria-controls="collapseEmployees">
-            <i class="bi bi-target"></i> Employees Selected: <%= @survey.receivers.count %>
-          </button>
-        </h2>
-        <div id="collapseEmployees" class="accordion-collapse collapse" aria-labelledby="headingEmployees" data-bs-parent="#accordionDetails">
-          <div class="accordion-body">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" class="table-col">First Name</th>
-                  <th scope="col" class="table-col">Last Name</th>
-                  <th scope="col" class="table-col">Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @survey.receivers.each do |receiver| %>
+  <div class="container-survey-show">
+    <h1>You're almost done, just a quick recap before sending!</h1>
+    <div class="container-accordion">
+      <div class="accordion" id="accordionDetails">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingEmployees">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmployees" aria-expanded="true" aria-controls="collapseEmployees">
+              <i class="bi bi-target"></i> Employees Selected: <%= @survey.receivers.count %>
+            </button>
+          </h2>
+          <div id="collapseEmployees" class="accordion-collapse collapse" aria-labelledby="headingEmployees" data-bs-parent="#accordionDetails">
+            <div class="accordion-body">
+              <table class="table table-hover">
+                <thead>
                   <tr>
-                    <td><%= receiver.user.first_name %></td>
-                    <td><%= receiver.user.last_name %></td>
-                    <td><%= receiver.user.email %></td>
+                    <th scope="col" class="table-col">First Name</th>
+                    <th scope="col" class="table-col">Last Name</th>
+                    <th scope="col" class="table-col">Email</th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  <% @survey.receivers.each do |receiver| %>
+                    <tr>
+                      <td><%= receiver.user.first_name %></td>
+                      <td><%= receiver.user.last_name %></td>
+                      <td><%= receiver.user.email %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTemplate">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTemplate" aria-expanded="true" aria-controls="collapseTemplate">
+              <i class="bi bi-target"></i> Template Selected: <%= @template.name if @template.present? %>
+            </button>
+          </h2>
+          <div id="collapseTemplate" class="accordion-collapse collapse" aria-labelledby="headingTemplate" data-bs-parent="#accordionDetails">
+            <div class="accordion-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" class="table-col">Questions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @template.questions.each do |question| %>
+                    <tr>
+                      <td><%= question.text %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingTemplate">
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTemplate" aria-expanded="true" aria-controls="collapseTemplate">
-            <i class="bi bi-target"></i> Template Selected: <%= @template.name if @template.present? %>
-          </button>
-        </h2>
-        <div id="collapseTemplate" class="accordion-collapse collapse" aria-labelledby="headingTemplate" data-bs-parent="#accordionDetails">
-          <div class="accordion-body">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" class="table-col">Questions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @template.questions.each do |question| %>
-                  <tr>
-                    <td><%= question.text %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="item-buttons">
-    <%= link_to "Save as Draft", root_path, class: "btn btn-primary" %>
-    <%= link_to "Send", root_path, class: "btn btn-primary" %>
+    <br>
+      <%= link_to "Send", root_path, class: "btn btn-primary" %>
   </div>
 </div>

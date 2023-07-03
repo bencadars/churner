@@ -8,6 +8,8 @@
 require "faker"
 
 puts "cleaning the database (except users)..."
+puts "cleaning receivers..."
+Receiver.destroy_all
 puts "Cleaning Surveys..."
 Survey.destroy_all
 puts "Cleaning Template_questions..."
@@ -100,7 +102,7 @@ template_questions.each do |template_question|
 end
 
 
-puts "creating fake users if user list is less than 20..."
+puts "creating fake users if user list is less than 100..."
 
 departure_types = ["resignation", "retirement", "termination", "layoff", "end of contract", "redundancy"]
 
@@ -119,8 +121,10 @@ def valid_dates?(date_of_integration, date_of_departure)
   date_of_integration < date_of_departure && date_of_integration < Date.today && date_of_departure < Date.today
 end
 
+User.create(first_name: "Benjamin", last_name: "cadars", email:"test@test.com", type_of_departure: "resignation", password:123456, date_of_integration: "2022-12-31", date_of_departure: "2023-02-19")
+
 if User.count < 100
-# Création de 10 utilisateurs
+# Création de 100 utilisateurs
   (100 - User.count).times do
   first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
