@@ -73,3 +73,10 @@
     <% end %>
   </div>
 </div>
+<%= link_to "Add a question", add_question_survey_path(@survey), data:{turbo_method: :post} %>
+<% @survey.questions.each do |question| %>
+  <%= simple_form_for [@survey, question] do |f| %>
+    <%= f.input :text %>
+    <%= f.button :submit %>
+  <% end %>
+<% end %>
