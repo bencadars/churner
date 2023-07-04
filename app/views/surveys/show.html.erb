@@ -66,7 +66,8 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTemplate">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTemplate" aria-expanded="true" aria-controls="collapseTemplate">
-              <i class="bi bi-target"></i> Template Selected: <%= @template.name if @template.present? %>
+              <i class="bi bi-target"></i> Template & Questions <br>
+              Template Selected: <%= @template.name if @template.present? %> & <%= @survey.questions.count %> Question(s) added
             </button>
           </h2>
           <div id="collapseTemplate" class="accordion-collapse collapse" aria-labelledby="headingTemplate" data-bs-parent="#accordionDetails">
@@ -79,6 +80,11 @@
                 </thead>
                 <tbody>
                   <% @template.questions.each do |question| %>
+                    <tr>
+                      <td><%= question.text %></td>
+                    </tr>
+                  <% end %>
+                  <% @survey.questions.each do |question| %>
                     <tr>
                       <td><%= question.text %></td>
                     </tr>
