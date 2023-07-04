@@ -14,8 +14,12 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :surveys, only: [:show, :new, :create, :update, :edit] do
+    member do
+      post :add_question
+    end
     resources :users, only: [:index]
     resources :templates, only: [:index]
+    resources :questions, only: [:update]
     member do
     post 'add_receivers'
     end
