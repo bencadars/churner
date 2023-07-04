@@ -1,14 +1,17 @@
 // Specific CSS for your home-page
 
-.card-counter {
-  overflow: hidden;
-  height: 120px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+.card-activity {
+  // height: 120px;
+  background: rgb(108, 155, 207);
+  color:white;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border: 1px solid rgb(108, 155, 207);
+  position: relative;
   padding: 20px;
-  margin: 30px;
-  border-radius: 4px;
-  width: 400px;
+  margin: 20px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  // width: 400px;
 }
 .card-title {
   display: flex;
@@ -17,6 +20,90 @@
   margin: 30px;
 }
 
+.link-survey {
+  position:absolute;
+  bottom: 5px;
+  right: 10px;
+  display: d-none;
+  color: white ;
+}
+
+.row.intro {
+  color: $primary;
+  font-size: large;
+  margin: 20px;
+  width: fit-content;
+}
+
+.counter {
+  margin: 20px;
+  border-radius: 4px;
+  float: left;
+  justify-content: space-around;
+  text-align:center;
+}
+
 #home {
   margin: 30px;
+  flex-grow: 1;
+}
+
+.card-chart {
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 20px;
+  margin: 30px;
+  border-radius: 4px;
+  // height: 600px;
+}
+
+
+.card {
+	border-radius: 8px;
+	color: white;
+	padding: 10px;
+	// position: relative;
+
+	.zmdi {
+		color: white;
+		font-size: 28px;
+		opacity: 0.3;
+		// position: absolute;
+		right: 13px;
+		top: 13px;
+	}
+
+	.stat {
+		border-top: 1px solid rgba(255, 255, 255, 0.3);
+		font-size: 10px;
+		margin-top: 25px;
+		padding: 10px 10px 0;
+	}
+
+	.title {
+		display: inline-block;
+		font-size: 16px;
+		padding: 10px 10px 0;
+	}
+
+	.value {
+		font-size: 28px;
+		padding: 0 10px;
+	}
+
+	&.beige {
+		background-color: rgb(244, 211, 211);
+	}
+
+	&.green {
+		background-color: rgb(212, 173, 252);
+	}
+
+	&.orange {
+		background-color: #ffdab9;
+	}
+
+	&.red {
+		background-color: rgb(232, 169, 169);
+	}
 }

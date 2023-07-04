@@ -10,36 +10,39 @@ require "faker"
 puts "cleaning the database (except users)..."
 puts "cleaning receivers..."
 Receiver.destroy_all
-puts "Cleaning Surveys..."
-Survey.destroy_all
+# puts "Cleaning Surveys..."
+# Survey.destroy_all
 puts "Cleaning Template_questions..."
 TemplateQuestion.destroy_all
-puts "cleaning templates..."
-Template.destroy_all
+# puts "cleaning templates..."
+# Template.destroy_all
 puts "cleaning questions..."
 Question.destroy_all
+puts "Deleting Receivers..."
+Receiver.destroy_all
 
 puts "Creating 6 templates..."
+if Template.count < 7
+  template_resignation = Template.create(
+    name: "Resignation",
+    description: "This survey aims to gather feedback from former employees who resigned, including the reasons for leaving, transition processes, and suggestions for improvement."
+  )
 
-template_resignation = Template.create(
-  name: "Resignation",
-  description: "This survey aims to gather feedback from former employees who resigned, including the reasons for leaving, transition processes, and suggestions for improvement."
-)
+  template_retirement = Template.create(
+    name: "Retirement",
+    description: "This survey is designed to collect feedback from employees who retired, addressing their overall experience, fondest memories, future plans, and suggestions for passing on responsibilities."
+  )
 
-template_retirement = Template.create(
-  name: "Retirement",
-  description: "This survey is designed to collect feedback from employees who retired, addressing their overall experience, fondest memories, future plans, and suggestions for passing on responsibilities."
-)
+  template_termination = Template.create(
+    name: "Termination",
+    description: "This survey focuses on gathering feedback from employees who were terminated, including their perspective on the circumstances, suggestions for improvement, and plans for addressing the termination when discussing it with future employers."
+  )
 
-template_termination = Template.create(
-  name: "Termination",
-  description: "This survey focuses on gathering feedback from employees who were terminated, including their perspective on the circumstances, suggestions for improvement, and plans for addressing the termination when discussing it with future employers."
-)
-
-template_layoff = Template.create(
-  name: "Layoff",
-  description: "This survey aims to collect feedback from employees who were laid off, addressing their initial reaction, provided assistance, job search plans, and potential interest in future opportunities with the company."
-)
+  template_layoff = Template.create(
+    name: "Layoff",
+    description: "This survey aims to collect feedback from employees who were laid off, addressing their initial reaction, provided assistance, job search plans, and potential interest in future opportunities with the company."
+  )
+end
 
 #template_end_contract = Template.create(
  # name: "End of Contract",
@@ -79,22 +82,22 @@ question_layoff4 = Question.create(text: "Would you consider rejoining the compa
 
 puts "Creating template_questions..."
 template_questions = [
-  { template_id: template_resignation.id, question_id: question_resignation1.id },
-  { template_id: template_resignation.id, question_id: question_resignation2.id },
-  { template_id: template_resignation.id, question_id: question_resignation3.id },
-  { template_id: template_resignation.id, question_id: question_resignation4.id },
-  { template_id: template_retirement.id, question_id: question_retirement1.id },
-  { template_id: template_retirement.id, question_id: question_retirement2.id },
-  { template_id: template_retirement.id, question_id: question_retirement3.id },
-  { template_id: template_retirement.id, question_id: question_retirement4.id },
-  { template_id: template_termination.id, question_id: question_termination1.id },
-  { template_id: template_termination.id, question_id: question_termination2.id },
-  { template_id: template_termination.id, question_id: question_termination3.id },
-  { template_id: template_termination.id, question_id: question_termination4.id },
-  { template_id: template_layoff.id, question_id: question_layoff1.id },
-  { template_id: template_layoff.id, question_id: question_layoff2.id },
-  { template_id: template_layoff.id, question_id: question_layoff3.id },
-  { template_id: template_layoff.id, question_id: question_layoff4.id },
+  { template_id: Template.find(17), question_id: question_resignation1.id },
+  { template_id: Template.find(17), question_id: question_resignation2.id },
+  { template_id: Template.find(17), question_id: question_resignation3.id },
+  { template_id: Template.find(17), question_id: question_resignation4.id },
+  { template_id: Template.find(14), question_id: question_retirement1.id },
+  { template_id: Template.find(14), question_id: question_retirement2.id },
+  { template_id: Template.find(14), question_id: question_retirement3.id },
+  { template_id: Template.find(14), question_id: question_retirement4.id },
+  { template_id: Template.find(15), question_id: question_termination1.id },
+  { template_id: Template.find(15), question_id: question_termination2.id },
+  { template_id: Template.find(15), question_id: question_termination3.id },
+  { template_id: Template.find(15), question_id: question_termination4.id },
+  { template_id: Template.find(16), question_id: question_layoff1.id },
+  { template_id: Template.find(16), question_id: question_layoff2.id },
+  { template_id: Template.find(16), question_id: question_layoff3.id },
+  { template_id: Template.find(16), question_id: question_layoff4.id },
 ]
 
 template_questions.each do |template_question|
@@ -159,7 +162,7 @@ survey1 = Survey.create(
   description: "This is the first survey",
   anonymous: true,
   user_id: 5,
-  template_id: template_resignation.id,
+  template_id: Template.find(17),
   status: "draft"
 )
 
@@ -168,7 +171,7 @@ survey2 = Survey.create(
   description: "This is the second survey",
   anonymous: false,
   user_id: 6,
-  template_id: template_termination.id,
+  template_id: Template.find(15),
   status: "active"
 )
 
@@ -177,6 +180,75 @@ survey3 = Survey.create(
   description: "This is the third survey",
   anonymous: true,
   user_id: 7,
-  template_id: template_layoff.id,
+  template_id: Template.find(16),
   status: "completed"
 )
+template_resignation = Template.find_by(name: "Resignation")
+template_termination = Template.find_by(name: "Termination")
+template_layoff = Template.find_by(name: "Layoff")
+
+# Création des 12 enquêtes
+20.times do |i|
+  status = "completed"
+
+  case i % 3
+  when 0
+    name = "Survey #{i+1}"
+    description = "This is the survey number #{i+1}."
+    anonymous = true
+    user_id = 5
+    template_id = template_resignation.id
+  when 1
+    name = "Survey #{i+1}"
+    description = "This is the survey number #{i+1}."
+    anonymous = false
+    user_id = 6
+    template_id = template_termination.id
+  when 2
+    name = "Survey #{i+1}"
+    description = "This is the survey number #{i+1}."
+    anonymous = true
+    user_id = 7
+    template_id = template_layoff.id
+  end
+
+  Survey.create(
+    name: name,
+    description: description,
+    anonymous: anonymous,
+    user_id: user_id,
+    template_id: template_id,
+    status: status
+  )
+end
+
+puts "Creating Receivers..."
+survey_ids = (Survey.first.id..Survey.last.id).to_a
+user_ids = (User.first.id..User.last.id).to_a
+
+# Création de 50 instances de Receiver avec des associations aléatoires
+50.times do
+  random_survey_id = survey_ids.sample
+  random_user_id = user_ids.sample
+
+  Receiver.create(survey_id: random_survey_id, user_id: random_user_id)
+end
+
+puts "Creating answers..."
+survey_ids = (Survey.first.id..Survey.last.id).to_a
+receiver_ids = (Receiver.first.id..Receiver.last.id).to_a
+question_ids = (Question.first.id..Question.last.id).to_a
+
+100.times do
+  random_receiver_id = receiver_ids.sample
+  random_survey_id = survey_ids.sample
+  random_question_id = question_ids.sample
+
+  text = "Answer text #{rand(1..100)}"
+  Answer.create(
+    receiver_id: random_receiver_id,
+    survey_id: random_survey_id,
+    question_id: random_question_id,
+    text: text,
+  )
+end
