@@ -1,13 +1,84 @@
-<div class="container-fluid">
-  <div class="card-title">
-    <h1>Dashboard</h1>
-    <div id="home"><%= link_to "New Survey", new_survey_path, class:"btn btn-primary" %></div>
-  </div>
-  <div class="card-counter">
-      <h5><u>This Month:</u></h5>
-        <ul>
-        <li><%= Survey.count %> Surveys created</li>
-        <li><%= User.count %> employees left</li>
-        </ul>
+<div class="container-fluid d-flex align-items-center justify-content-between">
+  <div class="row intro">
+    <p><%= @welcome_message %></p>
+    </div class="row">
+      <div class="d-flex justify-content-end m-4">
+      <%= link_to "New Survey", new_survey_path, class:"btn btn-primary" %>
+      </div>
     </div>
+  </div>
+  <div class="container-fluid d-flex">
+    <div class="col-lg-3 card-activities">
+      <div class="card-activity">
+        <h6>Last Active Survey:</h6>
+          <ul><li><%= Survey.last.name %> created on <%= Survey.last.created_at.strftime("%d/%m/%Y") %> at <%= Survey.last.created_at.strftime("%H:%M:%S") %> by <%= Survey.last.user.first_name + " " + Survey.last.user.last_name %></li>
+          <li>Survey sent to <%= Survey.last.receivers.count %> employees</li></ul>
+          <div class="link-survey">
+          <%= link_to "See Last Survey", root_path %></div>
+      </div>
+      <div class="card-activity">
+        <h6>Last 30 days:</h6>
+          <ul><li><%= @count_survey_on_last_30_days %> Surveys created</li>
+          <li><%= @count_receiver_on_last_30_days %> employees were asked for feedback</li>
+          <li><%= @count_receiver_who_answered_last_30_days %> employees answered</li></ul>
+          <div class="link-survey">
+            <%= link_to "See all Surveys", root_path %></div>
+      </div>
+      <div class="card-activity">
+        <h6>Since using Churner:</h6>
+          <ul><li><%= Survey.count %> Surveys created</li>
+          <li><%= Receiver.count %> employees were asked for feedback</li>
+          <li><%= @count_receiver_who_answered %> employees answered</li></ul>
+          <div class="link-survey">
+            <%= link_to "See all Surveys", root_path %></div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="row">
+        <div class="col-lg counter">
+          <div class="card beige" style="position: relative;">
+            <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of employees who answered at least one of the surveys sent to them"></i>
+						<div class="title">Response Rate</div>
+						<i class="zmdi zmdi-upload"></i>
+						<div class="value">55%</div>
+						<div class="stat"><b>6</b>% increase YoY</div>
+					</div>
+        </div>
+        <div class="col-lg counter">
+          <div class="card green" style="position: relative;">
+            <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of respondents who expressed regret for leaving you company"></i>
+						<div class="title">Regret Rate</div>
+						<i class="zmdi zmdi-upload"></i>
+						<div class="value">22%</div>
+						<div class="stat"><b>4</b>% increase MoM</div>
+					</div>
+        </div>
+        <div class="col-lg counter">
+          <div class="card orange" style="position: relative;">
+            <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of respondents who expressed nostalgia about their time working at your company"></i>
+						<div class="title">Nostalgia Rate</div>
+						<i class="zmdi zmdi-upload"></i>
+						<div class="value">26%</div>
+						<div class="stat"><b>3</b>% increase MoM</div>
+					</div>
+        </div>
+        <div class="col-lg counter">
+          <div class="card red" style="position: relative;">
+            <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of employees who left in the last 12 months"></i>
+						<div class="title">Turnover Rate</div>
+						<i class="zmdi zmdi-upload"></i>
+						<div class="value">12%</div>
+						<div class="stat"><b>2</b>% increase YoY</div>
+					</div>
+        </div>
+      <div class="card-chart">
+      <canvas id="stat" data-controller="bar-chart" data-departure="<%= @departure %>" data-label="<%= @months_array %>" >
+      </canvas>
+      </div>
+      <div class="card-chart">
+      <canvas id="nps" data-controller="line-chart" data-survey="<%= @departure %>" data-label="<%= @months_array %>" >
+      </canvas>
+      </div>
+    </div>
+  </div>
 </div>
