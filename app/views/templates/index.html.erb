@@ -37,14 +37,14 @@
         <thead>
           <tr>
             <th scope="col" class="table-col"></th>
-            <th scope="col" class="table-col">Name</th>
+            <th scope="col" class="table-col">Template</th>
             <th scope="col" class="table-col">Description</th>
           </tr>
         </thead>
         <tbody>
           <% @templates.each do |template| %>
             <tr>
-              <th scope="row"><%= radio_button_tag "survey[template_id]", template.id, false, data: {check_all_boxes_target:"checkbox"} %></th>
+              <th scope="row"><%= radio_button_tag "survey[template_id]", template.id, @survey.template == template, data: {check_all_boxes_target:"checkbox"} %></th>
               <td><%= template.name %></td>
               <td><%= template.description %>
                 <div class="accordion" id="accordionExample">
@@ -73,10 +73,27 @@
     <% end %>
   </div>
 </div>
-<%= link_to "Add a question", add_question_survey_path(@survey), data:{turbo_method: :post} %>
-<% @survey.questions.each do |question| %>
-  <%= simple_form_for [@survey, question] do |f| %>
-    <%= f.input :text %>
-    <%= f.button :submit %>
-  <% end %>
-<% end %>
+<br>
+<div class="container-fluid">
+  <div class="container-template-index">
+    <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="table-col">Questions</th>
+            </tr>
+          </thead>
+    </table>
+         <% @survey.questions.each do |question| %>
+              <%= simple_form_for [@survey, question] do |f| %>
+                <%= f.label :text,"Question" %> <%= f.input :text, label: false %>
+                <%= f.button :submit, class: "btn btn-outline-primary btn-sm" %>
+              <% end %>
+          <% end %>
+          <br>
+   <div class="d-flex justify-content-between">
+      <%= link_to "Add a question", add_question_survey_path(@survey), data:{turbo_method: :post}, class: "btn btn-primary" %>
+      <%= link_to  "Confirm Template & Questions", survey_users_path(@survey), class: "btn btn-primary" %>
+    </div>
+ </div>
+ <br>
+</div>
