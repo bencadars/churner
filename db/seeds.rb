@@ -226,13 +226,13 @@ puts "Creating Receivers..."
 survey_ids = (Survey.first.id..Survey.last.id).to_a
 user_ids = (User.first.id..User.last.id).to_a
 
-if receivers < 51
+if Receiver.count < 51
 50.times do
   random_survey_id = survey_ids.sample
   random_user_id = user_ids.sample
 
   Receiver.create(survey_id: random_survey_id, user_id: random_user_id)
-end
+  end
 end
 
 puts "Creating answers..."
@@ -240,6 +240,7 @@ survey_ids = (Survey.first.id..Survey.last.id).to_a
 receiver_ids = (Receiver.first.id..Receiver.last.id).to_a
 question_ids = (Question.first.id..Question.last.id).to_a
 
+if Answer.count < 100
 100.times do
   random_receiver_id = receiver_ids.sample
   random_survey_id = survey_ids.sample
@@ -252,4 +253,5 @@ question_ids = (Question.first.id..Question.last.id).to_a
     question_id: random_question_id,
     text: text,
   )
+  end
 end

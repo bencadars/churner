@@ -2,4 +2,4 @@ meta_product_name: "Churner"
 meta_title: "Churner - Unveil Employee Departure, build a stronger culture!"
 meta_description: "Churner helps you build a stronger corporate culture by unveiling the true reasons of employees' departure"
 meta_image: "logo_blanc_churner" # should exist in `app/assets/images/`
-twitter_account: "@product_twitter_account"   # required for Twitter Cards
+twitter_account: "@benjamincadars"   # required for Twitter Cards
