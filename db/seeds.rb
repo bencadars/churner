@@ -226,12 +226,13 @@ puts "Creating Receivers..."
 survey_ids = (Survey.first.id..Survey.last.id).to_a
 user_ids = (User.first.id..User.last.id).to_a
 
-# Création de 50 instances de Receiver avec des associations aléatoires
+if receivers < 51
 50.times do
   random_survey_id = survey_ids.sample
   random_user_id = user_ids.sample
 
   Receiver.create(survey_id: random_survey_id, user_id: random_user_id)
+end
 end
 
 puts "Creating answers..."
