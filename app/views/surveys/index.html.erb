@@ -1,0 +1,60 @@
+<div class="container-fluid">
+<div class="container-search-table">
+    <div class="container-table">
+    <div class="container-search-survey">
+      <%= form_with url: surveys_path, method: :get do |form| %>
+        <div class="item-search-input-survey">
+          <div class="input-search">
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Search Surveys" %>
+          </div>
+          <div class="item-filter">
+            <%= select_tag "filter[status]", raw("
+              <option value='draft' #{'selected' if params[:filter]&.[](:status) == 'draft'}>draft</option>
+              <option value='active' #{'selected' if params[:filter]&.[](:status) == 'active'}>active</option>
+              <option value='completed' #{'selected' if params[:filter]&.[](:status) == 'completed'}>completed</option>
+              <option value='archived' #{'selected' if params[:filter]&.[](:status) == 'archived'}>archived</option>"),
+            prompt: "Filter by survey status", class: "form-select" %>
+          </div>
+          <div class="button-search">
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+      <%= form_with url: archive_surveys_path, method: :patch do |form| %>
+          <table class="table table-hover" data-controller="check-all-boxes">
+        <thead>
+          <tr>
+            <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: { action: "change->check-all-boxes#checkAll" } %></th>
+            <th scope="col" class="table-col">Name</th>
+            <th scope="col" class="table-col">Description</th>
+            <th scope="col" class="table-col">Status</th>
+            <th scope="col" class="table-col">Created by</th>
+            <th scope="col" class="table-col">Created on</th>
+            <th scope="col" class="table-col">Nb of receivers</th>
+            <th scope="col" class="table-col">Nb of respondents</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @surveys.each do |survey| %>
+          <tr>
+            <th scope="row"><%= check_box_tag "selected_survey_ids[]", survey.id, false, disabled: survey.status == "active", data: { check_all_boxes_target: "checkbox" } %></th>
+            <td><%= survey.name %></td>
+            <td><%= survey.description %></td>
+            <td><span class="badge text-bg-light"><%= survey.status %></span></td>
+            <td><%= survey.user.first_name + " " + survey.user.last_name %></td>
+            <td><%= survey.created_at.strftime("%d/%m/%Y") %></td>
+            <td><%= survey.receivers.count %></td>
+            <td><%= Receiver.joins(:answers).where(answers: { survey_id: survey.id }).distinct.count%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="action-top"><%= submit_tag "Archive Survey", class: "btn btn-primary" %></div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,10 @@ export default class extends Controller {
     console.log("coucou")
   }
   checkAll(event) {
-    this.checkboxTargets.forEach(checkbox => checkbox.checked = event.currentTarget.checked)
+    this.checkboxTargets.forEach(checkbox => {
+      if (!checkbox.disabled) {
+        checkbox.checked = event.currentTarget.checked
+      }
+    })
   }
 }

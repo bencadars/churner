@@ -18,6 +18,8 @@ puts "cleaning templates..."
 Template.destroy_all
 puts "cleaning questions..."
 Question.destroy_all
+puts "cleaning answers..."
+Answer.destroy_all
 
 User.destroy_all
 
@@ -237,21 +239,25 @@ end
 
 puts "Creating answers..."
 survey_ids = (Survey.first.id..Survey.last.id).to_a
-receiver_ids = (Receiver.first.id..Receiver.last.id).to_a
-question_ids = (Question.first.id..Question.last.id).to_a
+# receiver_ids = (Receiver.first.id..Receiver.last.id).to_a
+# question_ids = (Question.first.id..Question.last.id).to_a
 
-if Answer.count < 100
-100.times do
-  random_receiver_id = receiver_ids.sample
-  random_survey_id = survey_ids.sample
-  random_question_id = question_ids.sample
+survey_ids.each do |survey|
+  question_ids = Question.where(survey_id: survey.id).pluck(:id)
+  receiver_ids = Receiver.where(survey_id: survey.id).pluck(:id)
 
-  text = "Answer text #{rand(1..100)}"
-  Answer.create!(
-    receiver_id: random_receiver_id,
-    survey_id: random_survey_id,
-    question_id: random_question_id,
-    text: text,
-  )
+  if Answer.count < 100
+    100.times do
+      random_receiver_id = receiver_ids.sample
+      random_question_id = question_ids.sample
+
+      text = "Answer text #{rand(1..100)}"
+      Answer.create!(
+        receiver_id: random_receiver_id,
+        survey_id: random_survey_id,
+        question_id: random_question_id,
+        text: text,
+      )
+    end
   end
 end
