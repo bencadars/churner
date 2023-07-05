@@ -61,9 +61,9 @@
       </div>
     <% end %>
   </div>
-  <div class="container-table">
-    <%= form_with url: add_receivers_survey_path(@survey), method: :post do |form| %>
 
+    <%= form_with url: add_receivers_survey_path(@survey), method: :post do |form| %>
+ <div class="container-table">
     <table class="table table-hover" data-controller="check-all-boxes">
       <thead>
         <tr>
@@ -78,21 +78,23 @@
         </tr>
       </thead>
       <tbody>
-        <% @users.each do |user| %>
-        <tr>
-          <th scope="row"><%= check_box_tag "selected_user_ids[]", user.id, @survey_users.include?(user), data: { check_all_boxes_target: "checkbox" } %></th>
-          <td><%= user.first_name %></td>
-          <td><%= user.last_name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.type_of_departure %></td>
-          <td><%= user.date_of_integration.strftime("%b %e%t, %Y") %></td>
-          <td><%= user.date_of_departure.strftime("%b %e%t, %Y") %></td>
-          <td><%= user.tenure_in_year %> y</td>
-        </tr>
-        <% end %>
+          <% @users.each do |user| %>
+          <tr>
+            <th scope="row"><%= check_box_tag "selected_user_ids[]", user.id, @survey_users.include?(user), data: { check_all_boxes_target: "checkbox" } %></th>
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.type_of_departure %></td>
+            <td><%= user.date_of_integration.strftime("%b %e%t, %Y") %></td>
+            <td><%= user.date_of_departure.strftime("%b %e%t, %Y") %></td>
+            <td><%= user.tenure_in_year %> y</td>
+          </tr>
+          <% end %>
       </tbody>
     </table>
+
+  </div>
     <%= submit_tag "Add to Survey", class: "btn btn-primary" %>
     <% end %>
-  </div>
+
 </div>

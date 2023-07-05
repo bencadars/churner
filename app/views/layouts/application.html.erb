@@ -24,9 +24,13 @@
     <%= favicon_link_tag %>
   </head>
   <body>
+  <div class= "main-container">
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-      <%= yield %>
+
+        <%= yield %>
+
     <%= render "shared/footer" %>
+     </div>
   </body>
 </html>
