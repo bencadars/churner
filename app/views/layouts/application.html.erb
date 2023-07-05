@@ -23,9 +23,13 @@
     <meta name="twitter:image:src" content="<%= meta_image %>">
   </head>
   <body>
+  <div class= "main-container">
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-      <%= yield %>
+
+        <%= yield %>
+
     <%= render "shared/footer" %>
+     </div>
   </body>
 </html>
