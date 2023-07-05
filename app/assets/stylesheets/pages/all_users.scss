@@ -13,24 +13,38 @@
   border: 2px solid #1EDD88;
 }
 
-.container-search-table {
+.container-search-table-users {
   margin: 50px;
+  background-color: white;
+  padding: 20px;
 }
 
-.item-search-input-survey {
+.item-search-input-users {
  display: flex;
+ position:relative;
+
 }
 
-.action-top {
+.action-top1 {
   position: absolute;
-  top: 142px;
-  right: 150px;
+  top: 135px;
+  right: 260px;
 }
 
-.container-search-survey {
+.action-top2 {
+  position: absolute;
+  top: 135px;
+  right: 80px;
+}
+.action-top3 {
+  position: absolute;
+  top: 135px;
+  right: 190px;
+}
+
+.container-search-users {
   display: flex;
   align-items: center;
   width: 850px;
   height: 60px;
-  position:relative;
 }

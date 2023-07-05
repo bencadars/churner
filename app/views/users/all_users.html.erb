@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="container-search-table-users">
+    <div class="container-search-users">
+      <%= form_with url: users_path, method: :get do |form| %>
+        <div class="item-search-input">
+          <div class="input-search">
+            <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Search former employees" %>
+          </div>
+          <div class="item-filter">
+            <%= select_tag "filter[type_of_departure]", raw("
+              <option value='resignation' #{'selected' if params[:filter]&.[](:type_of_departure) == 'resignation'}>resignation</option>
+              <option value='retirement' #{'selected' if params[:filter]&.[](:type_of_departure) == 'retirement'}>retirement</option>
+              <option value='termination' #{'selected' if params[:filter]&.[](:type_of_departure) == 'termination'}>termination</option>
+              <option value='layoff' #{'selected' if params[:filter]&.[](:type_of_departure) == 'layoff'}>layoff</option>"),
+            prompt: "Filter by type of departure", class: "form-select" %>
+          </div>
+          <div class="button-search">
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+          </div>
+          <div class="action-top1" ><%= link_to "Add", root_path, class: "btn btn-primary" %></div>
+          <div class="action-top2"><%= link_to "Delete", root_path, class: "btn btn-primary" %></div>
+          <div class="action-top3"><%= link_to "Export", root_path, class: "btn btn-primary" %></div>
+        </div>
+      <% end %>
+    </div>
+    <%= form_with url: users_path, method: :post do |form| %>
+
+    <table class="table table-hover" data-controller="check-all-boxes">
+      <thead>
+        <tr>
+          <th scope="col" class="table-col"><%= check_box_tag "select_all", "0", false, data: { action: "change->check-all-boxes#checkAll" } %></th>
+          <th scope="col" class="table-col">First Name</th>
+          <th scope="col" class="table-col">Last Name</th>
+          <th scope="col" class="table-col">Email</th>
+          <th scope="col" class="table-col">Type of Departure</th>
+          <th scope="col" class="table-col">Date of Entry</th>
+          <th scope="col" class="table-col">Date of Departure</th>
+          <th scope="col" class="table-col">Tenure in company</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <th scope="row"><%= check_box_tag "selected_user_ids[]", user.id, false, data: { check_all_boxes_target: "checkbox" } %></th>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.type_of_departure %></td>
+          <td><%= user.date_of_integration.strftime("%b %e%t, %Y") %></td>
+          <td><%= user.date_of_departure.strftime("%b %e%t, %Y") %></td>
+          <td><%= user.tenure_in_year %> y</td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>
