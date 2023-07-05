@@ -18,8 +18,7 @@ TemplateQuestion.destroy_all
 # Template.destroy_all
 puts "cleaning questions..."
 Question.destroy_all
-puts "Deleting Receivers..."
-Receiver.destroy_all
+
 
 puts "Creating 6 templates..."
 if Template.count < 7
