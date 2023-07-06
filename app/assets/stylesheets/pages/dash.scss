@@ -1,0 +1,62 @@
+.card {
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .zmdi {
+    color: white;
+    font-size: 28px;
+    opacity: 0.3;
+    right: 13px;
+    top: 13px;
+  }
+
+  .stat {
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 10px;
+    margin-top: 25px;
+    padding: 10px 10px 0;
+  }
+
+  .title {
+    display: inline-block;
+    font-size: 16px;
+    padding: 10px 10px 0;
+  }
+
+  .value {
+    font-size: 28px;
+    padding: 0 10px;
+  }
+
+  &.peach {
+    background-color: #e8c3b9;
+  }
+
+  &.violet {
+    background-color: #8e5ea2;
+  }
+
+  &.vert {
+    background-color: #3cba9f;
+  }
+
+  &.tomato {
+    background-color: #c45850;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+  }
+
+  .chart {
+    height: 100%;
+    width: 100%;
+  }
+}
