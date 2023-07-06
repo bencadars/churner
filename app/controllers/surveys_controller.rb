@@ -5,6 +5,22 @@ class SurveysController < ApplicationController
     @template = @survey.template
   end
 
+  def index
+    @surveys = Survey.all
+
+    if params[:filter]
+      if params[:filter][:status].present?
+        @surveys = @surveys.where(status: params[:filter][:status])
+      end
+    end
+    if params[:query].present?
+      @surveys = @surveys.search_by_name_and_status_and_description(params[:query])
+    end
+
+    @count_receiver_who_answered_survey = Receiver.joins(:answers).where("receivers.created_at >= ?", 30.days.ago).distinct.count
+
+  end
+
   def new
     @survey = Survey.new
   end
@@ -21,6 +37,18 @@ class SurveysController < ApplicationController
     @survey = Survey.find(params[:id])
     @survey.update!(survey_params)
     redirect_to survey_templates_path(@survey), notice: "Template added"
+  end
+
+  def archive
+    survey_ids = params[:selected_survey_ids].map(&:to_i)
+
+    survey_ids.each do |survey_id|
+      survey = Survey.find(survey_id)
+      survey.status = "archived"
+      survey.save
+    end
+    flash[:notice] = "#{survey_ids.count} surveys archived"
+    redirect_to surveys_path
   end
 
   def edit

@@ -18,6 +18,8 @@ puts "cleaning templates..."
 Template.destroy_all
 puts "cleaning questions..."
 Question.destroy_all
+puts "cleaning answers..."
+Answer.destroy_all
 
 User.destroy_all
 
@@ -255,3 +257,12 @@ if Answer.count < 100
   )
   end
 end
+
+
+
+
+
+
+
+
+
