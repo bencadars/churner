@@ -7,19 +7,21 @@
 #   Character.create!(name: "Luke", movie: movies.first)
 require "faker"
 
-puts "cleaning the database (except users)..."
-puts "cleaning receivers..."
+puts "Cleaning the database..."
+puts "Cleaning answers..."
+Answer.destroy_all
+puts "Cleaning receivers..."
 Receiver.destroy_all
+puts "Cleaning survey_questions"
+SurveyQuestion.destroy_all
 puts "Cleaning Surveys..."
 Survey.destroy_all
 puts "Cleaning Template_questions..."
 TemplateQuestion.destroy_all
-puts "cleaning templates..."
+puts "Cleaning Templates..."
 Template.destroy_all
-puts "cleaning questions..."
+puts "Cleaning questions..."
 Question.destroy_all
-puts "cleaning answers..."
-Answer.destroy_all
 
 User.destroy_all
 
@@ -107,7 +109,7 @@ template_questions.each do |template_question|
 end
 
 
-puts "creating fake users if user list is less than 100..."
+puts "Creating fake users if user list is less than 100..."
 
 departure_types = ["resignation", "retirement", "termination", "layoff", "end of contract", "redundancy"]
 
@@ -229,11 +231,12 @@ survey_ids = (Survey.first.id..Survey.last.id).to_a
 user_ids = (User.first.id..User.last.id).to_a
 
 if Receiver.count < 51
-50.times do
-  random_survey_id = survey_ids.sample
-  random_user_id = user_ids.sample
+  survey_ids.each do |survey_id|
+    random_user_ids = user_ids.sample(rand(3..15))
 
-  Receiver.create!(survey_id: random_survey_id, user_id: random_user_id)
+    random_user_ids.each do |user_id|
+      Receiver.create!(survey_id: survey_id, user_id: user_id)
+    end
   end
 end
 
@@ -244,8 +247,8 @@ question_ids = (Question.first.id..Question.last.id).to_a
 
 if Answer.count < 100
 100.times do
-  random_receiver_id = receiver_ids.sample
   random_survey_id = survey_ids.sample
+  random_receiver_id = Survey.find(random_survey_id).receivers.pluck(:id).sample
   random_question_id = question_ids.sample
 
   text = "Answer text #{rand(1..100)}"
@@ -257,12 +260,3 @@ if Answer.count < 100
   )
   end
 end
-
-
-
-
-
-
-
-
-

@@ -15,7 +15,7 @@
         <li>Survey sent to <%= Survey.last.receivers.count %> employees</li>
       </ul>
       <div class="link-survey">
-        <%= link_to "See Last Survey", root_path %>
+        <%= link_to "See Last Survey", survey_path(Survey.where(user: current_user).last) %>
       </div>
     </div>
     <div class="card-activity">
@@ -26,7 +26,7 @@
         <li><%= @count_receiver_who_answered_last_30_days %> employees answered</li>
       </ul>
       <div class="link-survey">
-        <%= link_to "See all Surveys", root_path %>
+        <%= link_to "See all Surveys", surveys_path %>
       </div>
     </div>
     <div class="card-activity">
@@ -37,7 +37,7 @@
         <li><%= @count_receiver_who_answered %> employees answered</li>
       </ul>
       <div class="link-survey">
-        <%= link_to "See all Surveys", root_path %>
+        <%= link_to "See all Surveys", surveys_path %>
       </div>
     </div>
   </div>
