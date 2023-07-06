@@ -1,3 +1,12 @@
+<div class="container-fluid d-flex align-items-center justify-content-between">
+  <div class="row intro">
+    <h1>Survey Results</h1>
+  </div>
+  <div class="item-buttons">
+    <%= link_to "Archive Survey", root_path, class: "btn btn-primary" %>
+    <%= link_to "Notify", root_path, class: "btn btn-primary" %>
+  </div>
+</div>
 <div class="container-fluid d-flex">
   <div class="col-lg-3 card-activities">
     <div class="card-activity">
@@ -6,15 +15,12 @@
         <li><%= Survey.last.name %> created on <%= Survey.last.created_at.strftime("%d/%m/%Y") %> at <%= Survey.last.created_at.strftime("%H:%M:%S") %> by <%= Survey.last.user.first_name + " " + Survey.last.user.last_name %></li>
         <li>Survey sent to <%= Survey.last.receivers.count %> employees</li>
       </ul>
-      <div class="link-survey">
-        <%= link_to "See Last Survey", root_path %>
-      </div>
     </div>
   </div>
   <div class="col-lg-9">
     <div class="row">
       <div class="col-lg counter">
-        <div class="card peach" style="position: relative;">
+        <div class="card beige" style="position: relative;">
           <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of former employees who responded to the survey sent to them"></i>
           <div class="title">Response Rate</div>
           <i class="zmdi zmdi-upload"></i>
@@ -22,15 +28,15 @@
         </div>
       </div>
       <div class="col-lg counter">
-        <div class="card violet" style="position: relative;">
+        <div class="card green" style="position: relative;">
           <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of people who answered between 7 and 10 on their general feeling towards the company"></i>
           <div class="title">Positive Sentiment Rate</div>
           <i class="zmdi zmdi-upload"></i>
           <div class="value">61%</div>
         </div>
       </div>
-      <div class="col-lg counter">
-        <div class="card vert" style="position: relative;">
+      <div class="col-lg counter small-piechart" >
+        <div class="card orange" style="position: relative;">
           <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of people who answered between 4 and 6 on their general feeling towards the company"></i>
           <div class="title">Neutral Sentiment Rate</div>
           <i class="zmdi zmdi-upload"></i>
@@ -38,7 +44,7 @@
         </div>
       </div>
       <div class="col-lg counter">
-        <div class="card tomato" style="position: relative;">
+        <div class="card red" style="position: relative;">
           <i class="fa-solid fa-circle-info" data-controller="tooltip" data-bs-toggle="tooltip" style="position: absolute; top: 5px; right: 5px;" title="% of people who answered between 0 and 3 on their general feeling towards the company"></i>
           <div class="title">Negative Sentiment Rate</div>
           <i class="zmdi zmdi-upload"></i>
@@ -46,20 +52,30 @@
         </div>
       </div>
     </div>
-    <div class="graphs">
-      <div class="graph">
-        <div class="chart-container">
-          <canvas id="bar-chart" class="chart" data-controller="dash-barchart" width="500" height="250"></canvas>
+  </div>
+</div>
+<div class="container-fluid d-flex">
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="graph">
+          <div class="chart-container">
+            <canvas id="pie-chart" class="chart" data-controller="dash-piechart"></canvas>
+          </div>
         </div>
       </div>
-      <div class="graph">
-        <div class="chart-container">
-          <canvas id="pie-chart" class="chart" data-controller="dash-piechart"></canvas>
+      <div class="col-lg-4">
+        <div class="graph">
+          <div class="chart-container">
+            <canvas id="polar-chart" class="chart" data-controller="dash-polarchart"></canvas>
+          </div>
         </div>
       </div>
-      <div class="graph">
-        <div class="chart-container">
-          <canvas id="bar-chart-horizontal" class="chart" data-controller="dash-barchart-horizontal"></canvas>
+      <div class="col-lg-4">
+        <div class="graph first-graph">
+          <div class="chart-container">
+            <canvas id="bar-chart" class="chart" data-controller="dash-barchart" width="500" height="250"></canvas>
+          </div>
         </div>
       </div>
     </div>
