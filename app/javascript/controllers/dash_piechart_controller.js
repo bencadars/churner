@@ -10,7 +10,7 @@ export default class extends Controller {
         labels: ["New job opportunity", "Career transition"],
         datasets: [{
           label: "Career",
-          backgroundColor: ["#3e95cd", "#8e5ea2"],
+          backgroundColor: ["rgb(235, 216, 178)", "rgb(232, 169, 169)"],
           data: [84, 16]
         }]
       },

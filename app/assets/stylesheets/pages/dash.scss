@@ -33,30 +33,42 @@
     padding: 0 10px;
   }
 
-  &.peach {
-    background-color: #e8c3b9;
+	&.beige {
+		background-color: rgb(244, 211, 211);
+	}
+
+	&.green {
+		background-color: rgb(212, 173, 252);
+	}
+
+	&.orange {
+		background-color: #ffdab9;
+	}
+
+	&.red {
+		background-color: rgb(232, 169, 169);
+	}
+
+  .counter {
+    height: auto;
+    margin-bottom: 20px;
   }
 
-  &.violet {
-    background-color: #8e5ea2;
+  .graphs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  &.vert {
-    background-color: #3cba9f;
+  .graph {
+    width: 32%;
+    margin-bottom: 20px;
   }
+}
 
-  &.tomato {
-    background-color: #c45850;
-  }
-
-  .chart-container {
-    position: relative;
-    height: 400px;
-    width: 100%;
-  }
-
-  .chart {
-    height: 100%;
-    width: 100%;
-  }
+.graph-card {
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  height: 33vh;
 }
