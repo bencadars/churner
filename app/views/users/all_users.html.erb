@@ -20,9 +20,19 @@
           <div class="button-search">
             <%= submit_tag "Search", class: "btn btn-primary" %>
           </div>
-          <div class="action-top1" ><%= link_to "Add", root_path, class: "btn btn-primary" %></div>
-          <div class="action-top2"><%= link_to "Delete", root_path, class: "btn btn-primary" %></div>
-          <div class="action-top3"><%= link_to "Export", root_path, class: "btn btn-primary" %></div>
+          <div class="action-top-dropdown">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Actions
+              </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Add</a></li>
+                  <li><a class="dropdown-item" href="#">Export</a></li>
+                  <li><a class="dropdown-item" href="#">Import</a></li>
+                  <li><a class="dropdown-item" href="#">Delete</a></li>
+                </ul>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
