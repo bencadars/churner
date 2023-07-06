@@ -150,7 +150,7 @@ end
 User.create!(first_name: "Benjamin", last_name: "cadars", email:"test@test.com", type_of_departure: "resignation", password:123456, date_of_integration: "2022-12-31", date_of_departure: "2023-02-19")
 
 # Création de 100 utilisateurs
-100.times do
+50.times do
   first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     email = Faker::Internet.unique.email
@@ -176,7 +176,7 @@ User.create!(first_name: "Benjamin", last_name: "cadars", email:"test@test.com",
     )
   end
 puts "Creating Resignation Users..."
-60.times do
+30.times do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   email = Faker::Internet.unique.email
