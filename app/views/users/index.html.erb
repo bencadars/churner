@@ -1,4 +1,5 @@
 <div class="container-fluid">
+
   <div class="container-breadcrumb-buttons">
     <div class="item-breadcrumb">
     <div class="row">
@@ -35,6 +36,7 @@
       <%= button_to "Next", survey_path(@survey) , method: :get, disabled: @survey.receivers.count == 0, class: "btn btn-primary" %>
     </div>
   </div>
+
   <div class="container-search">
     <%= form_with url: survey_users_path, method: :get do |form| %>
       <div class="item-search-input">
@@ -94,7 +96,7 @@
     </table>
 
   </div>
-    <%= submit_tag "Add to Survey", class: "btn btn-primary" %>
+    <%= submit_tag "Add to Survey", class: "btn btn-primary pour-marge" %>
     <% end %>
 
 </div>

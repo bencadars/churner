@@ -36,7 +36,7 @@
       <div class="accordion" id="accordionDetails">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingEmployees">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmployees" aria-expanded="true" aria-controls="collapseEmployees">
+            <button class="accordion-button accordeon-position collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmployees" aria-expanded="false" aria-controls="collapseEmployees">
               <i class="bi bi-target"></i> Employees Selected: <%= @survey.receivers.count %>
             </button>
           </h2>
@@ -65,7 +65,7 @@
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTemplate">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTemplate" aria-expanded="true" aria-controls="collapseTemplate">
+            <button class="accordion-button accordeon-position collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTemplate" aria-expanded="false" aria-controls="collapseTemplate">
               <i class="bi bi-target"></i> Template & Questions <br>
               Template Selected: <%= @template.name if @template.present? %> & <%= @survey.questions.count %> Question(s) added
             </button>
