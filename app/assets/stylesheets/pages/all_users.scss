@@ -17,30 +17,20 @@
   margin: 50px;
   background-color: white;
   padding: 20px;
+  position:relative;
 }
 
 .item-search-input-users {
  display: flex;
- position:relative;
-
 }
 
-.action-top1 {
+.action-top-dropdown {
   position: absolute;
-  top: 135px;
-  right: 260px;
+  top: 25px;
+  right: 20px;
 }
 
-.action-top2 {
-  position: absolute;
-  top: 135px;
-  right: 80px;
-}
-.action-top3 {
-  position: absolute;
-  top: 135px;
-  right: 190px;
-}
+
 
 .container-search-users {
   display: flex;

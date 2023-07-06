@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <div class="container-search-table">
-    <div class="container-table">
+    <div class="container-table-survey">
     <div class="container-search-survey">
       <%= form_with url: surveys_path, method: :get do |form| %>
         <div class="item-search-input-survey">
@@ -53,7 +53,11 @@
           <% end %>
         </tbody>
       </table>
-      <div class="action-top"><%= submit_tag "Archive Survey", class: "btn btn-primary" %></div>
+      <div class="action-top">
+      <%= link_to "New Survey", new_survey_path , class: "btn btn-primary" %>
+      <%= submit_tag "Archive", class: "btn btn-primary", id:"archive" %>
+
+      </div>
       <% end %>
     </div>
   </div>

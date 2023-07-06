@@ -49,11 +49,11 @@
               <td><%= template.description %>
                 <div class="accordion" id="accordionExample">
                   <div class="accordion-item">
-                    <h2 class="accordion-header">
-                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
-                      Questions
+
+                      <button class="accordion-header accordion-button collapsed accordeon-position " type="button" data-bs-toggle="collapse" data-bs-target="#Acordeon-<%= template.id%>" aria-expanded="true" aria-controls="collapseOne">
+                    Questions
                       </button>
-                    </h2>
+
                     <div id="Acordeon-<%= template.id%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
                       <div class="accordion-body">
                         <% template.questions.each do |question| %>

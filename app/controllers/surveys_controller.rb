@@ -40,15 +40,19 @@ class SurveysController < ApplicationController
   end
 
   def archive
-    survey_ids = params[:selected_survey_ids].map(&:to_i)
+    if params[:selected_survey_ids].nil?
+      redirect_to surveys_path
+    else
+      survey_ids = params[:selected_survey_ids].map(&:to_i)
 
-    survey_ids.each do |survey_id|
-      survey = Survey.find(survey_id)
-      survey.status = "archived"
-      survey.save
+      survey_ids.each do |survey_id|
+        survey = Survey.find(survey_id)
+        survey.status = "archived"
+        survey.save
+      end
+      flash[:notice] = "#{survey_ids.count} surveys archived"
+      redirect_to surveys_path
     end
-    flash[:notice] = "#{survey_ids.count} surveys archived"
-    redirect_to surveys_path
   end
 
   def edit
