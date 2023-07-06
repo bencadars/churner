@@ -159,7 +159,7 @@ User.create!(first_name: "Benjamin", last_name: "cadars", email:"test@test.com",
     next if user_exists?(email)
 
     type_of_departure = departure_types.sample
-    date_of_integration = random_date(Date.new(2017, 1, 1), Date.new(2023, 6, 25))
+    date_of_integration = random_date(Date.new(2016, 1, 1), Date.new(2023, 6, 25))
     date_of_departure = random_date(date_of_integration, Date.new(2023, 6, 25))
 
     # Vérifie si les dates sont valides
@@ -183,7 +183,7 @@ puts "Creating Resignation Users..."
   # Vérifie si l'utilisateur existe déjà avec l'adresse e-mail générée
   next if user_exists?(email)
   type_of_departure = departure_types.sample
-  date_of_integration = random_date(Date.new(2017, 1, 1), Date.new(2023, 6, 25))
+  date_of_integration = random_date(Date.new(2021, 1, 1), Date.new(2023, 6, 25))
   date_of_departure = random_date(date_of_integration, Date.new(2023, 6, 25))
   # Vérifie si les dates sont valides
   next unless valid_dates?(date_of_integration, date_of_departure)

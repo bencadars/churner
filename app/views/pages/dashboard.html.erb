@@ -15,7 +15,7 @@
         <li>Survey sent to <%= Survey.last.receivers.count %> employees</li>
       </ul>
       <div class="link-survey">
-        <%= link_to "See Last Survey", survey_path(Survey.where(user: current_user).last) %>
+        <%= link_to "See Last Survey", dash_path %>
       </div>
     </div>
     <div class="card-activity">

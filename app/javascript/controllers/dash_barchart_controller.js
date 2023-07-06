@@ -8,7 +8,7 @@ export default class extends Controller {
     new Chart(document.getElementById("bar-chart"), {
       type: 'bar',
       data: {
-        labels: ["Lack of recognition", "Lack of career development", "Toxic corporate culture", "Unsatisfactory remuneration", "Work-life balance issues"],
+        labels: ["Lack of recognition", "Lack of career development", "Covid impact", "Unsatisfactory remuneration", "Work-life balance issues"],
         datasets: [
           {
             label: "",
