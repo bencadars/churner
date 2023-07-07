@@ -147,8 +147,6 @@ def valid_dates?(date_of_integration, date_of_departure)
   date_of_integration < date_of_departure && date_of_integration < Date.today && date_of_departure < Date.today
 end
 
-User.create!(first_name: "Benjamin", last_name: "cadars", email:"test@test.com", type_of_departure: "layoff", password:123456, date_of_integration: "2022-12-31", date_of_departure: "2023-02-19")
-
 # Création de 100 utilisateurs
 50.times do
   first_name = Faker::Name.first_name
@@ -197,6 +195,9 @@ puts "Creating Resignation Users..."
     date_of_departure: date_of_departure
   )
 end
+
+User.create!(first_name: "Benjamin", last_name: "cadars", email:"test@test.com", type_of_departure: "layoff", password:123456, date_of_integration: "2020-12-31", date_of_departure: "2024-12-31")
+
 
 puts "Creating Surveys..."
 
