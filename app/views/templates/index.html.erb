@@ -84,14 +84,17 @@
           </thead>
     </table>
          <% @survey.questions.each do |question| %>
-              <%= simple_form_for [@survey, question] do |f| %>
-                <%= f.label :text,"Question" %> <%= f.input :text, label: false %>
-                <%= f.button :submit, class: "btn btn-outline-primary btn-sm" %>
+              <%= simple_form_for [@survey, question], data: { controller: "scroll-bottom" }, html: { data: { target: "scroll-bottom.form" } } do |f| %>
+                <%= f.label :text,"Type your question :" %> <br><br> <%= f.input :text, label: false %>
+                <%= f.button :submit, "Update Question", class: "btn btn-outline-primary btn-sm" %>
+                <br>
+                <br>
+                <br>
               <% end %>
           <% end %>
           <br>
    <div class="d-flex justify-content-between">
-      <%= link_to "Add a question", add_question_survey_path(@survey), data:{turbo_method: :post}, class: "btn btn-primary" %>
+      <%= link_to "New question", add_question_survey_path(@survey), data:{turbo_method: :post}, class: "btn btn-primary" %>
       <%= link_to  "Confirm Template & Questions", survey_users_path(@survey), class: "btn btn-primary" %>
     </div>
  </div>

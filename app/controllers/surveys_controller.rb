@@ -36,7 +36,7 @@ class SurveysController < ApplicationController
   def update
     @survey = Survey.find(params[:id])
     @survey.update!(survey_params)
-    redirect_to survey_templates_path(@survey), notice: "Template added"
+    redirect_to survey_templates_path(@survey, anchor: "bottom"), notice: "Template added"
   end
 
   def archive
@@ -62,7 +62,7 @@ class SurveysController < ApplicationController
   def add_question
     @survey = Survey.find(params[:id])
     @question = @survey.questions.create()
-    redirect_to survey_templates_path(@survey), notice: "Question added"
+    redirect_to survey_templates_path(@survey, anchor: "bottom"), notice: "Question added"
   end
 
   def add_receivers
